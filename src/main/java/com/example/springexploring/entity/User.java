@@ -34,9 +34,6 @@ public class User {
     @Column
     private int rating = 0;
 
-    @OneToMany(mappedBy = "owner")
-    private List<Item> items;
-
     @OneToMany(mappedBy = "userWhoOrd")
     private List<Order> orders;
 

@@ -6,15 +6,15 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class UserDto {
+public class UserDTO {
 
     private String firstName;
     private String lastName;
     private int age;
     private int rating;
 
-    public static UserDto map(User user) {
-        return new UserDto(user.getFirstName(),
+    public static UserDTO map(User user) {
+        return new UserDTO(user.getFirstName(),
                 user.getLastName(),
                 user.getAge(),
                 user.getRating());

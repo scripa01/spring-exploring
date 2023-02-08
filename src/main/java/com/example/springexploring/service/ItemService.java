@@ -11,5 +11,5 @@ public interface ItemService {
 
     void save(AddItemCommand command);
 
-    List<Item> findAll();
+    List<ItemDTO> findAll();
 }

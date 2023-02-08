@@ -1,7 +1,8 @@
 package com.example.springexploring.service;
 
 import com.example.springexploring.controller.AddUserCommand;
-import com.example.springexploring.dto.UserDto;
+import com.example.springexploring.controller.UpdateUserCommand;
+import com.example.springexploring.dto.UserDTO;
 import com.example.springexploring.entity.User;
 import com.example.springexploring.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -26,12 +27,24 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional(readOnly = true)
-    public List<UserDto> findAll() {
+    public List<UserDTO> findAll() {
         List<User> users = userRepository.findAll();
-        List<UserDto> dtos = new ArrayList<>();
+        List<UserDTO> dtos = new ArrayList<>();
         for (User user : users) {
-            dtos.add(UserDto.map(user));
+            dtos.add(UserDTO.map(user));
         }
         return dtos;
+    }
+    @Transactional
+    public void update( UpdateUserCommand updatedPerson){
+        User user = userRepository.findById(updatedPerson.getId()).orElseThrow();
+        user.setAge(updatedPerson.getAge());
+        user.setFirstName(updatedPerson.getFirstName());
+        user.setLastName(updatedPerson.getLastName());
+        userRepository.save(user);
+    }
+    @Transactional
+    public void delete(Long id){
+        userRepository.deleteById(id);
     }
 }

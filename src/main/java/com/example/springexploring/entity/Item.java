@@ -42,15 +42,11 @@ public class Item {
     )
     private List<Order> orders = new ArrayList<>();
 
-    @ManyToOne
-    @JoinColumn(name = "user_id", referencedColumnName = "Id")
-    private User owner;
-
     @Column(name = "creation_date")
     @Setter(value = AccessLevel.PRIVATE)
     private LocalDateTime creationDate;
 
-    public Item(String name, String description, int price, long userId) {
+    public Item(String name, String description, int price) {
         this.name = name;
         this.description = description;
         this.price = price;

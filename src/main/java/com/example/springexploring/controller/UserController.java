@@ -1,6 +1,6 @@
 package com.example.springexploring.controller;
 
-import com.example.springexploring.dto.UserDto;
+import com.example.springexploring.dto.UserDTO;
 import com.example.springexploring.service.RatingService;
 import com.example.springexploring.service.UserService;
 import com.example.springexploring.service.VoteCommand;
@@ -29,9 +29,11 @@ public class UserController {
     }
 
     @GetMapping
-    public ResponseEntity<List<UserDto>> findAll() {
+    public ResponseEntity<List<UserDTO>> findAll() {
         return ResponseEntity.ok(userService.findAll());
     }
+    @GetMapping("/{/id}")
+    // One user
 
     @PostMapping("/vote")
     public void vote(@RequestBody VoteCommand command) {

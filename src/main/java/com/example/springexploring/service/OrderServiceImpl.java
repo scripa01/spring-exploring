@@ -16,7 +16,6 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-@Transactional(readOnly = true)
 public class OrderServiceImpl implements OrderService {
 
     private final OrderRepository orderRepository;
@@ -34,14 +33,17 @@ public class OrderServiceImpl implements OrderService {
         orderRepository.save(order);
     }
     @Override
+    @Transactional(readOnly = true)
     public List<OrderDTO> findAll() {
         return orderDTOMapper.mapList(orderRepository.findAll());
     }
     @Override
+    @Transactional(readOnly = true)
     public OrderDTO findById(Long id) {
         return orderDTOMapper.map(orderRepository.findById(id).orElseThrow());
     }
     @Override
+    @Transactional
     public void update(UpdateOrderCommand updatedOrder) {
         Order order = orderRepository.findById(updatedOrder.getId()).orElseThrow();
         order.setUserWhoOrd(userRepository.findById(updatedOrder.getUserId()).orElseThrow());
@@ -49,6 +51,7 @@ public class OrderServiceImpl implements OrderService {
         orderRepository.save(order);
     }
     @Override
+    @Transactional
     public void delete(Long id) {
         orderRepository.deleteById(id);
     }

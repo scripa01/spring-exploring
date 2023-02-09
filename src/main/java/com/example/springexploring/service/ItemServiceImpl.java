@@ -30,10 +30,12 @@ public class ItemServiceImpl implements ItemService {
             return itemDTOMapper.mapList(itemRepository.findAll());
     }
     @Override
+    @Transactional(readOnly = true)
     public ItemDTO findById(Long id) {
         return itemDTOMapper.map(itemRepository.findById(id).orElseThrow());
     }
     @Override
+    @Transactional
     public void update(UpdateItemCommand updatedItem) {
         Item item = itemRepository.findById(updatedItem.getId()).orElseThrow();
         item.setName(updatedItem.getName());
@@ -42,6 +44,7 @@ public class ItemServiceImpl implements ItemService {
         itemRepository.save(item);
     }
     @Override
+    @Transactional
     public void delete(Long id) {
         itemRepository.deleteById(id);
     }

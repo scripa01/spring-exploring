@@ -1,5 +1,6 @@
 package com.example.springexploring.service;
 
+import com.example.springexploring.controller.VoteCommand;
 import com.example.springexploring.entity.Rating;
 import com.example.springexploring.entity.User;
 import com.example.springexploring.repository.RatingRepository;

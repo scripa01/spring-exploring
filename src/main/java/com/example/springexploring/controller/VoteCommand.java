@@ -1,4 +1,4 @@
-package com.example.springexploring.service;
+package com.example.springexploring.controller;
 
 import lombok.Data;
 

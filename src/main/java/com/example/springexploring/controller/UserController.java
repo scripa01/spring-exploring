@@ -1,17 +1,12 @@
 package com.example.springexploring.controller;
 
 import com.example.springexploring.dto.UserDTO;
+import com.example.springexploring.entity.User;
 import com.example.springexploring.service.RatingService;
 import com.example.springexploring.service.UserService;
-import com.example.springexploring.service.VoteCommand;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -27,19 +22,27 @@ public class UserController {
     public void save(@RequestBody AddUserCommand command) {
         userService.save(command);
     }
-
     @GetMapping
     public ResponseEntity<List<UserDTO>> findAll() {
         return ResponseEntity.ok(userService.findAll());
     }
-//    @GetMapping("/{/id}")
-//    // One user
+    @GetMapping("/{id}")
+    public ResponseEntity<UserDTO> findById(@PathVariable("id") Long id){
+        return ResponseEntity.ok(userService.findById(id));
+    }
+    @PutMapping()
+    public void update( @RequestBody UpdateUserCommand updateUserCommand) {
+        userService.update(updateUserCommand);
+    }
 
     @PostMapping("/vote")
     public void vote(@RequestBody VoteCommand command) {
         ratingService.vote(command);
     }
-
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable Long id){
+        userService.delete(id);
+    }
     @ExceptionHandler(RuntimeException.class)
     public ResponseEntity<String> handleException(RuntimeException e) {
         return ResponseEntity.badRequest().body(e.getMessage());

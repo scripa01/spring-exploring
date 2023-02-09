@@ -21,7 +21,6 @@ import java.util.stream.Collectors;
 public class OrderController {
     private final OrderService orderService;
 
-
     @PostMapping
     public void save(@RequestBody AddOrderCommand command) {
         orderService.save(command);
@@ -31,8 +30,17 @@ public class OrderController {
     public ResponseEntity<List<OrderDTO>> findAll() {
         return ResponseEntity.ok(orderService.findAll()); //Jackson конвертирует эти объекты в JSON
     }
-
-
-
+    @GetMapping("/{id}")
+    public ResponseEntity<OrderDTO> findById(@PathVariable("id") Long id){
+        return ResponseEntity.ok(orderService.findById(id));
+    }
+    @PutMapping()
+    public void update( @RequestBody UpdateOrderCommand updateOrderCommand) {
+        orderService.update(updateOrderCommand);
+    }
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable Long id){
+        orderService.delete(id);
+    }
 
 }

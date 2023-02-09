@@ -11,5 +11,4 @@ public class UpdateUserCommand {
   private String firstName;
   private String lastName;
   private int age;
-
 }

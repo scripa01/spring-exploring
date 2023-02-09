@@ -34,6 +34,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public UserDTO findById(Long id) {
         return userDTOMapper.map(userRepository.findById(id).orElseThrow());
     }

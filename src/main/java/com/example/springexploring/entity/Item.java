@@ -32,14 +32,7 @@ public class Item {
     @Column
     private int price;
 
-    @ManyToMany(cascade = {
-            CascadeType.PERSIST,
-            CascadeType.MERGE
-    })
-    @JoinTable(name = "item_order",
-            joinColumns = @JoinColumn(name = "item_id"),
-            inverseJoinColumns = @JoinColumn(name = "order_id")
-    )
+    @ManyToMany(mappedBy = "items")
     private List<Order> orders = new ArrayList<>();
 
     @Column(name = "creation_date")

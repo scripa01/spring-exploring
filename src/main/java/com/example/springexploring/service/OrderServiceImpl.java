@@ -28,7 +28,7 @@ public class OrderServiceImpl implements OrderService {
     public void save(AddOrderCommand command) {
         Order order = new Order(
                 userRepository.findById(command.getUserId()).orElseThrow(),
-                itemRepository.findAllById(command.getItems())
+                itemRepository.findAllById(command.getItemsId())
         );
         orderRepository.save(order);
     }

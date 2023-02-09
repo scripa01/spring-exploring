@@ -27,7 +27,15 @@ public class Order {
     @Setter(value = AccessLevel.PRIVATE)
     private LocalDateTime creationDate = LocalDateTime.now();
 
-    @ManyToMany(mappedBy = "orders")
+
+    @ManyToMany(cascade = {
+            CascadeType.PERSIST,
+            CascadeType.MERGE
+    })
+    @JoinTable(name = "item_order",
+            joinColumns = @JoinColumn(name = "order_id"),
+            inverseJoinColumns = @JoinColumn(name = "item_id")
+    )
     private List<Item> items = new ArrayList<>();
 
     @ManyToOne
@@ -39,7 +47,6 @@ public class Order {
         this.userWhoOrd = user;
         this.items = items;
     }
-
 
     @Override
     public boolean equals(Object o) {

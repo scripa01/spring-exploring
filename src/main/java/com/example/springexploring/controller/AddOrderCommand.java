@@ -7,7 +7,7 @@ import java.util.List;
 @Data   //В комманде только айди!!!
 public class AddOrderCommand {
 
-    private List<Long> items;
+    private List<Long> itemsId;
 
     private Long userId;
 }

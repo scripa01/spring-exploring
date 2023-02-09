@@ -13,4 +13,5 @@ public class UserDTO {
     private int age;
     private long rating;
 
+
 }

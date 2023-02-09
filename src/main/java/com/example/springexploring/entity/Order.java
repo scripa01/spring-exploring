@@ -32,7 +32,7 @@ public class Order {
             CascadeType.PERSIST,
             CascadeType.MERGE
     })
-    @JoinTable(name = "item_order",
+    @JoinTable(name = "order_item",
             joinColumns = @JoinColumn(name = "order_id"),
             inverseJoinColumns = @JoinColumn(name = "item_id")
     )

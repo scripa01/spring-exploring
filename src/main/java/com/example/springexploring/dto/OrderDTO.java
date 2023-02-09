@@ -17,6 +17,6 @@ public class OrderDTO { //Возвращаем ДТО сущности!!!
 
     private List<ItemDTO> items = new ArrayList<>();
 
-    private User userWhoOrd;
+    private UserDTO userWhoOrd;
 
 }

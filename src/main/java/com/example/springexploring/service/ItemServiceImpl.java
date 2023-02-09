@@ -1,6 +1,7 @@
 package com.example.springexploring.service;
 
 import com.example.springexploring.controller.AddItemCommand;
+import com.example.springexploring.controller.UpdateItemCommand;
 import com.example.springexploring.dto.ItemDTO;
 import com.example.springexploring.dto.Mapper.Mapper;
 import com.example.springexploring.entity.Item;
@@ -28,4 +29,22 @@ public class ItemServiceImpl implements ItemService {
     public List<ItemDTO> findAll() {
             return itemDTOMapper.mapList(itemRepository.findAll());
     }
+    @Override
+    public ItemDTO findById(Long id) {
+        return itemDTOMapper.map(itemRepository.findById(id).orElseThrow());
+    }
+    @Override
+    public void update(UpdateItemCommand updatedItem) {
+        Item item = itemRepository.findById(updatedItem.getId()).orElseThrow();
+        item.setName(updatedItem.getName());
+        item.setDescription(updatedItem.getDescription());
+        item.setPrice(updatedItem.getPrice());
+        itemRepository.save(item);
+    }
+    @Override
+    public void delete(Long id) {
+        itemRepository.deleteById(id);
+    }
+
+
 }

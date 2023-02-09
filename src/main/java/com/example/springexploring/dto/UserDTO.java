@@ -11,12 +11,6 @@ public class UserDTO {
     private String firstName;
     private String lastName;
     private int age;
-    private int rating;
+    private long rating;
 
-    public static UserDTO map(User user) {
-        return new UserDTO(user.getFirstName(),
-                user.getLastName(),
-                user.getAge(),
-                user.getRating());
-    }
 }

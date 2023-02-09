@@ -19,6 +19,4 @@ public class OrderDTO { //Возвращаем ДТО сущности!!!
 
     private User userWhoOrd;
 
-
-
 }

@@ -32,8 +32,8 @@ public class UserController {
     public ResponseEntity<List<UserDTO>> findAll() {
         return ResponseEntity.ok(userService.findAll());
     }
-    @GetMapping("/{/id}")
-    // One user
+//    @GetMapping("/{/id}")
+//    // One user
 
     @PostMapping("/vote")
     public void vote(@RequestBody VoteCommand command) {

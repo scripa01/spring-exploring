@@ -32,7 +32,7 @@ public class User {
     @Setter(value = AccessLevel.PRIVATE)
     private LocalDateTime creationDate;
     @Column
-    private int rating = 0;
+    private long rating = 0;
 
     @OneToMany(mappedBy = "userWhoOrd")
     private List<Order> orders;

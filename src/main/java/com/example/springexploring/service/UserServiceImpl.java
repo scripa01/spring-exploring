@@ -1,18 +1,17 @@
 package com.example.springexploring.service;
 
-import com.example.springexploring.controller.AddUserCommand;
-import com.example.springexploring.controller.UpdateUserCommand;
+import com.example.springexploring.controller.AddCommand.AddUserCommand;
+import com.example.springexploring.controller.UpdateCommand.UpdateUserCommand;
 import com.example.springexploring.dto.Mapper.Mapper;
 import com.example.springexploring.dto.UserDTO;
 import com.example.springexploring.entity.User;
+import com.example.springexploring.exception.CustomRuntimeException;
 import com.example.springexploring.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -36,11 +35,11 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional(readOnly = true)
     public UserDTO findById(Long id) {
-        return userDTOMapper.map(userRepository.findById(id).orElseThrow());
+        return userDTOMapper.map(userRepository.findById(id).orElseThrow(() -> new CustomRuntimeException("user with id - " + id + " not found")));
     }
     @Transactional
     public void update( UpdateUserCommand updatedPerson){
-        User user = userRepository.findById(updatedPerson.getId()).orElseThrow();
+        User user = userRepository.findById(updatedPerson.getId()).orElseThrow(() -> new CustomRuntimeException("user with id - " + updatedPerson.getId() + " not found"));
         user.setAge(updatedPerson.getAge());
         user.setFirstName(updatedPerson.getFirstName());
         user.setLastName(updatedPerson.getLastName());

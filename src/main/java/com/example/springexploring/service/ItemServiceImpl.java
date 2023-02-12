@@ -1,10 +1,11 @@
 package com.example.springexploring.service;
 
-import com.example.springexploring.controller.AddItemCommand;
-import com.example.springexploring.controller.UpdateItemCommand;
+import com.example.springexploring.controller.AddCommand.AddItemCommand;
+import com.example.springexploring.controller.UpdateCommand.UpdateItemCommand;
 import com.example.springexploring.dto.ItemDTO;
 import com.example.springexploring.dto.Mapper.Mapper;
 import com.example.springexploring.entity.Item;
+import com.example.springexploring.exception.CustomRuntimeException;
 import com.example.springexploring.repository.ItemRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -32,12 +33,12 @@ public class ItemServiceImpl implements ItemService {
     @Override
     @Transactional(readOnly = true)
     public ItemDTO findById(Long id) {
-        return itemDTOMapper.map(itemRepository.findById(id).orElseThrow());
+        return itemDTOMapper.map(itemRepository.findById(id).orElseThrow(() -> new CustomRuntimeException("Item with id - " + id + " not found")));
     }
     @Override
     @Transactional
     public void update(UpdateItemCommand updatedItem) {
-        Item item = itemRepository.findById(updatedItem.getId()).orElseThrow();
+        Item item = itemRepository.findById(updatedItem.getId()).orElseThrow(() -> new CustomRuntimeException("Item with id - " + updatedItem.getId() + " not found"));
         item.setName(updatedItem.getName());
         item.setDescription(updatedItem.getDescription());
         item.setPrice(updatedItem.getPrice());
@@ -48,6 +49,4 @@ public class ItemServiceImpl implements ItemService {
     public void delete(Long id) {
         itemRepository.deleteById(id);
     }
-
-
 }

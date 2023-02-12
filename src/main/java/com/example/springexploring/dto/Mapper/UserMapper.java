@@ -9,6 +9,6 @@ import org.springframework.stereotype.Component;
 public class UserMapper implements Mapper<User, UserDTO> {
     @Override
     public UserDTO map(User entity) {
-        return new UserDTO(entity.getFirstName(), entity.getLastName(), entity.getAge(),entity.getRating());
+        return new UserDTO( entity.getId(),entity.getFirstName(), entity.getLastName(), entity.getAge(),entity.getRating());
     }
 }

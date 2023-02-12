@@ -21,6 +21,6 @@ public class OrderMapper implements Mapper<Order, OrderDTO> {
     private final Mapper<User, UserDTO> userDTOMapper;
     @Override
     public OrderDTO map(Order entity) {
-        return new OrderDTO(entity.getCreationDate(), itemDTOMapper.mapList(entity.getItems()), userDTOMapper.map(entity.getUserWhoOrd()));
+        return new OrderDTO(entity.getId(), entity.getCreationDate(), itemDTOMapper.mapList(entity.getItems()), userDTOMapper.map(entity.getUserWhoOrd()));
     }
 }

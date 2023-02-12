@@ -11,6 +11,6 @@ public class ItemMapper implements Mapper<Item, ItemDTO>{
 
     @Override
     public ItemDTO map(Item entity) {
-        return new ItemDTO(entity.getName(),entity.getDescription(),entity.getPrice(),entity.getCreationDate());
+        return new ItemDTO(entity.getId(), entity.getName(),entity.getDescription(),entity.getPrice(),entity.getCreationDate());
     }
 }

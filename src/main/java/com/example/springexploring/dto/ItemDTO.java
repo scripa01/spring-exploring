@@ -13,7 +13,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 public class ItemDTO {
-
+    private Long id;
     private String name;
     private String description;
     private int price;

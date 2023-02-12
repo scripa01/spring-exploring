@@ -1,10 +1,8 @@
 package com.example.springexploring.service;
 
-import com.example.springexploring.controller.AddItemCommand;
-import com.example.springexploring.controller.UpdateItemCommand;
+import com.example.springexploring.controller.AddCommand.AddItemCommand;
+import com.example.springexploring.controller.UpdateCommand.UpdateItemCommand;
 import com.example.springexploring.dto.ItemDTO;
-import com.example.springexploring.dto.OrderDTO;
-import com.example.springexploring.entity.Item;
 
 import java.util.List;
 

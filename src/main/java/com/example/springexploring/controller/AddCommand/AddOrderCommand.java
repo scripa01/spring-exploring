@@ -1,4 +1,4 @@
-package com.example.springexploring.controller;
+package com.example.springexploring.controller.AddCommand;
 
 import lombok.Data;
 

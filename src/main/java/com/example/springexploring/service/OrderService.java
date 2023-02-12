@@ -1,11 +1,9 @@
 package com.example.springexploring.service;
 
-import com.example.springexploring.controller.AddOrderCommand;
-import com.example.springexploring.controller.UpdateOrderCommand;
+import com.example.springexploring.controller.AddCommand.AddOrderCommand;
+import com.example.springexploring.controller.UpdateCommand.UpdateOrderCommand;
 import com.example.springexploring.dto.OrderDTO;
-import com.example.springexploring.entity.Order;
 
-import java.util.Arrays;
 import java.util.List;
 
 public interface OrderService {

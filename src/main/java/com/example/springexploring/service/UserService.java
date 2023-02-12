@@ -1,7 +1,7 @@
 package com.example.springexploring.service;
 
-import com.example.springexploring.controller.AddUserCommand;
-import com.example.springexploring.controller.UpdateUserCommand;
+import com.example.springexploring.controller.AddCommand.AddUserCommand;
+import com.example.springexploring.controller.UpdateCommand.UpdateUserCommand;
 import com.example.springexploring.dto.UserDTO;
 
 import java.util.List;

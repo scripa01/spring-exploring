@@ -1,10 +1,11 @@
 package com.example.springexploring.service;
 
-import com.example.springexploring.controller.AddOrderCommand;
-import com.example.springexploring.controller.UpdateOrderCommand;
+import com.example.springexploring.controller.AddCommand.AddOrderCommand;
+import com.example.springexploring.controller.UpdateCommand.UpdateOrderCommand;
 import com.example.springexploring.dto.Mapper.Mapper;
 import com.example.springexploring.dto.OrderDTO;
 import com.example.springexploring.entity.Order;
+import com.example.springexploring.exception.CustomRuntimeException;
 import com.example.springexploring.repository.ItemRepository;
 import com.example.springexploring.repository.OrderRepository;
 import com.example.springexploring.repository.UserRepository;
@@ -27,7 +28,7 @@ public class OrderServiceImpl implements OrderService {
     @Transactional
     public void save(AddOrderCommand command) {
         Order order = new Order(
-                userRepository.findById(command.getUserId()).orElseThrow(),
+                userRepository.findById(command.getUserId()).orElseThrow(() -> new CustomRuntimeException("user with id - " + command.getUserId() + " not found")),
                 itemRepository.findAllById(command.getItemsId())
         );
         orderRepository.save(order);
@@ -40,13 +41,13 @@ public class OrderServiceImpl implements OrderService {
     @Override
     @Transactional(readOnly = true)
     public OrderDTO findById(Long id) {
-        return orderDTOMapper.map(orderRepository.findById(id).orElseThrow());
+        return orderDTOMapper.map(orderRepository.findById(id).orElseThrow(() -> new CustomRuntimeException("Order with id - " + id + " not found")));
     }
     @Override
     @Transactional
     public void update(UpdateOrderCommand updatedOrder) {
-        Order order = orderRepository.findById(updatedOrder.getId()).orElseThrow();
-        order.setUserWhoOrd(userRepository.findById(updatedOrder.getUserId()).orElseThrow());
+        Order order = orderRepository.findById(updatedOrder.getId()).orElseThrow(() -> new CustomRuntimeException("Order with id - " + updatedOrder.getId() + " not found"));
+        order.setUserWhoOrd(userRepository.findById(updatedOrder.getUserId()).orElseThrow(() -> new CustomRuntimeException("user with id - " + updatedOrder.getUserId() + " not found")));
         order.setItems(itemRepository.findAllById(updatedOrder.getItems()));
         orderRepository.save(order);
     }

@@ -13,6 +13,8 @@ import java.util.List;
 @AllArgsConstructor
 public class OrderDTO { //Возвращаем ДТО сущности!!!
 
+    private Long id;
+
     private LocalDateTime creationDate;
 
     private List<ItemDTO> items = new ArrayList<>();

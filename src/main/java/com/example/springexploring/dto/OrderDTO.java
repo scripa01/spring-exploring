@@ -21,4 +21,6 @@ public class OrderDTO { //Возвращаем ДТО сущности!!!
 
     private UserDTO userWhoOrd;
 
+    private Long TotalPrice;
+
 }

@@ -3,6 +3,8 @@ package com.example.springexploring.controller.UpdateCommand;
 import lombok.Data;
 import lombok.ToString;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Data
@@ -10,10 +12,11 @@ import java.util.List;
 public class UpdateOrderCommand {
 
 
-  private Long id;
+    private Long id;
 
-  private List<Long> items;
-
-  private Long userId;
+    @NotEmpty
+    private List<Long> items;
+    @NotNull
+    private Long userId;
 
 }

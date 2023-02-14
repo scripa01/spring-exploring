@@ -12,6 +12,7 @@ import com.example.springexploring.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 import java.util.List;
 
 
@@ -22,7 +23,7 @@ public class OrderServiceImpl implements OrderService {
     private final OrderRepository orderRepository;
     private final UserRepository userRepository;
     private final ItemRepository itemRepository;
-    private final Mapper<Order,OrderDTO> orderDTOMapper;
+    private final Mapper<Order, OrderDTO> orderDTOMapper;
 
     @Override
     @Transactional
@@ -31,18 +32,22 @@ public class OrderServiceImpl implements OrderService {
                 userRepository.findById(command.getUserId()).orElseThrow(() -> new CustomRuntimeException("user with id - " + command.getUserId() + " not found")),
                 itemRepository.findAllById(command.getItemsId())
         );
+
         orderRepository.save(order);
     }
+
     @Override
     @Transactional(readOnly = true)
     public List<OrderDTO> findAll() {
         return orderDTOMapper.mapList(orderRepository.findAll());
     }
+
     @Override
     @Transactional(readOnly = true)
     public OrderDTO findById(Long id) {
         return orderDTOMapper.map(orderRepository.findById(id).orElseThrow(() -> new CustomRuntimeException("Order with id - " + id + " not found")));
     }
+
     @Override
     @Transactional
     public void update(UpdateOrderCommand updatedOrder) {
@@ -51,9 +56,11 @@ public class OrderServiceImpl implements OrderService {
         order.setItems(itemRepository.findAllById(updatedOrder.getItems()));
         orderRepository.save(order);
     }
+
     @Override
     @Transactional
     public void delete(Long id) {
         orderRepository.deleteById(id);
     }
+
 }

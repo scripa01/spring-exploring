@@ -4,13 +4,14 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.aspectj.weaver.ast.Or;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+
 @Entity
 @Table(name = "orders")
 @Getter
@@ -26,6 +27,10 @@ public class Order {
     @Column(name = "creation_date")
     @Setter(value = AccessLevel.PRIVATE)
     private LocalDateTime creationDate = LocalDateTime.now();
+
+    @Column
+    @Min(value = 0)
+    private Long totalPrice = 0L;
 
 
     @ManyToMany(cascade = {
@@ -43,7 +48,20 @@ public class Order {
     private User userWhoOrd;
 
 
-    public Order(User user,List<Item> items) {
+    public Long getTotalPrice() {
+        Long sum = 0L;
+        for (Item item : items) {
+            sum += item.getPrice();
+        }
+        return sum;
+    }
+
+    @PreUpdate
+    public void updateTotalPrice() {
+        this.totalPrice = getTotalPrice();
+    }
+
+    public Order(User user, List<Item> items) {
         this.userWhoOrd = user;
         this.items = items;
     }
@@ -55,6 +73,7 @@ public class Order {
         Order order = (Order) o;
         return Objects.equals(id, order.id);
     }
+
     @Override
     public int hashCode() {
         return getClass().hashCode();

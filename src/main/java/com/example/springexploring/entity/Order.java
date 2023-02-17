@@ -9,6 +9,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Min;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -30,9 +31,16 @@ public class Order {
 
     @Column
     @Min(value = 0)
+    @Setter(value = AccessLevel.PRIVATE)
     private Long totalPrice = 0L;
 
+    @Column
+    @Enumerated(EnumType.STRING)
+    private Status status = Status.CREATED;
 
+    @Column
+    @Setter(value = AccessLevel.PRIVATE)
+    private LocalDateTime deliveryDate;
     @ManyToMany(cascade = {
             CascadeType.PERSIST,
             CascadeType.MERGE
@@ -57,7 +65,7 @@ public class Order {
     }
 
     @PreUpdate
-    public void updateTotalPrice() {
+    public void recalculateTotalPrice() {
         this.totalPrice = getTotalPrice();
     }
 
@@ -77,5 +85,10 @@ public class Order {
     @Override
     public int hashCode() {
         return getClass().hashCode();
+    }
+
+    public void deliver(Order order){
+        order.status = Status.DELIVERED;
+        order.deliveryDate = LocalDateTime.now();
     }
 }

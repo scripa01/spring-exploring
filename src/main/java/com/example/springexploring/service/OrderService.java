@@ -15,7 +15,11 @@ public interface OrderService {
 
     OrderDTO findById(Long id);
 
-    void update( UpdateOrderCommand updatedOrder);
+    void update(UpdateOrderCommand updatedOrder);
 
     void delete(Long id);
+
+    List<OrderDTO> findAllByUserWhoOrd_Id(Long id);
+
+    void setDeliveryStatus(Long id);
 }

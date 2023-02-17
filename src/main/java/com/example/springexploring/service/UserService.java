@@ -8,13 +8,15 @@ import java.util.List;
 
 public interface UserService {
 
-  void save(AddUserCommand command);
+    void save(AddUserCommand command);
 
-  List<UserDTO> findAll();
+    List<UserDTO> findAll();
 
-  void update( UpdateUserCommand updatedPerson);
+    void update(UpdateUserCommand updatedPerson);
 
-  void delete(Long id);
+    void delete(Long id);
 
-  UserDTO findById(Long id);
+    UserDTO findById(Long id);
+
+    boolean checkIfUserAreOwner(Long userId, Long orderId);
 }

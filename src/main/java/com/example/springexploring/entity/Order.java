@@ -9,7 +9,6 @@ import javax.persistence.*;
 import javax.validation.constraints.Min;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -87,7 +86,7 @@ public class Order {
         return getClass().hashCode();
     }
 
-    public void deliver(Order order){
+    public static void deliver(Order order) {
         order.status = Status.DELIVERED;
         order.deliveryDate = LocalDateTime.now();
     }

@@ -42,11 +42,6 @@ public class UserServiceImpl implements UserService {
         return userDTOMapper.map(userRepository.findById(id).orElseThrow(() -> new CustomRuntimeException("user with id - " + id + " not found")));
     }
 
-    @Override
-    public boolean checkIfUserAreOwner(Long userId, Long orderId) {
-        return orderRepository.findById(orderId).orElseThrow(() -> new CustomRuntimeException("Order with id - " + orderId + " not found")).getUserWhoOrd().getId().
-                equals(userId);
-    }
 
     @Transactional
     public void update(UpdateUserCommand updatedPerson) {

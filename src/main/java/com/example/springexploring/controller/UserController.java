@@ -58,14 +58,6 @@ public class UserController {
         return ResponseEntity.ok(orderService.findAllByUserWhoOrd_Id(id)); //Jackson конвертирует эти объекты в JSON
     }
 
-    @PostMapping("/orders")
-    public ResponseEntity<Void> deliveredOrder(@RequestBody DeliveredOrderCommand deliveredOrderCommand) {
-        if (userService.checkIfUserAreOwner(deliveredOrderCommand.getUserId(), deliveredOrderCommand.getId())) {
-            orderService.setDeliveryStatus(deliveredOrderCommand.getId());
-            return ResponseEntity.ok().build();
-        } else
-            return ResponseEntity.badRequest().build();  //Jackson конвертирует эти объекты в JSON
-    }
 
 //    @ExceptionHandler(RuntimeException.class)
 //    public ResponseEntity<String> handleException(RuntimeException e) {

@@ -21,5 +21,7 @@ public interface OrderService {
 
     List<OrderDTO> findAllByUserWhoOrd_Id(Long id);
 
-    void setDeliveryStatus(Long id);
+    void setDeliveryStatus(Long orderId, Long userId);
+
+
 }

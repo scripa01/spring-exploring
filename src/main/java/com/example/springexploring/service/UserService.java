@@ -18,5 +18,4 @@ public interface UserService {
 
     UserDTO findById(Long id);
 
-    boolean checkIfUserAreOwner(Long userId, Long orderId);
 }

@@ -1,12 +1,10 @@
 package com.example.springexploring.service;
 
 import com.example.springexploring.controller.AddCommand.AddOrderCommand;
-import com.example.springexploring.controller.DeliveredOrderCommand;
 import com.example.springexploring.controller.UpdateCommand.UpdateOrderCommand;
 import com.example.springexploring.dto.Mapper.Mapper;
 import com.example.springexploring.dto.OrderDTO;
 import com.example.springexploring.entity.Order;
-import com.example.springexploring.entity.Status;
 import com.example.springexploring.exception.CustomRuntimeException;
 import com.example.springexploring.repository.ItemRepository;
 import com.example.springexploring.repository.OrderRepository;
@@ -66,15 +64,23 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<OrderDTO> findAllByUserWhoOrd_Id(Long id) {
         return orderDTOMapper.mapList(orderRepository.findAllByUserWhoOrd_Id(id));
     }
 
     @Override
-    public void setDeliveryStatus(Long orderId) {
+    @Transactional
+    public void setDeliveryStatus(Long orderId, Long userId) {
         Order order = orderRepository.findById(orderId).orElseThrow(() -> new CustomRuntimeException("Order with id - " + orderId + " not found"));
-        order.deliver(order);
+        assertThatUserAreOwner(userId, order);
+        Order.deliver(order);
         orderRepository.save(order);
+    }
+
+    private void assertThatUserAreOwner(Long userId, Order order) {
+        if (!order.getUserWhoOrd().getId().equals(userId))
+            throw new CustomRuntimeException("User with Id - " + userId + " dont have order with Id - " + order.getId());
     }
 
 }

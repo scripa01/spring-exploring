@@ -26,17 +26,26 @@ public class OrderController {
     public ResponseEntity<List<OrderDTO>> findAll() {
         return ResponseEntity.ok(orderService.findAll()); //Jackson конвертирует эти объекты в JSON
     }
+
     @GetMapping("/{id}")
-    public ResponseEntity<OrderDTO> findById(@PathVariable("id") Long id){
+    public ResponseEntity<OrderDTO> findById(@PathVariable("id") Long id) {
         return ResponseEntity.ok(orderService.findById(id));
     }
+
     @PutMapping()
-    public void update( @RequestBody UpdateOrderCommand updateOrderCommand) {
+    public void update(@RequestBody UpdateOrderCommand updateOrderCommand) {
         orderService.update(updateOrderCommand);
     }
+
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable Long id){
+    public void delete(@PathVariable Long id) {
         orderService.delete(id);
+    }
+
+    @PostMapping("/deliver")
+    public void deliveredOrder(@RequestBody DeliveredOrderCommand deliveredOrderCommand) {
+
+        orderService.setDeliveryStatus(deliveredOrderCommand.getOrderId(), deliveredOrderCommand.getUserId());                //Jackson конвертирует эти объекты в JSON
     }
 
 }

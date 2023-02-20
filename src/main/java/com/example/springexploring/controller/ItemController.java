@@ -26,16 +26,19 @@ public class ItemController {
     public ResponseEntity<List<ItemDTO>> findAll() {
         return ResponseEntity.ok(itemService.findAll()); //Jackson конвертирует эти объекты в JSON
     }
+
     @GetMapping("/{id}")
-    public ResponseEntity<ItemDTO> findById(@PathVariable("id") Long id){
+    public ResponseEntity<ItemDTO> findById(@PathVariable("id") Long id) {
         return ResponseEntity.ok(itemService.findById(id));
     }
+
     @PutMapping()
-    public void update( @RequestBody UpdateItemCommand updateItemCommand) {
+    public void update(@RequestBody UpdateItemCommand updateItemCommand) {
         itemService.update(updateItemCommand);
     }
+
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable Long id){
+    public void delete(@PathVariable Long id) {
         itemService.delete(id);
     }
 

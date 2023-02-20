@@ -1,12 +1,10 @@
 package com.example.springexploring.entity;
 
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.Min;
+import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -86,8 +84,12 @@ public class Order {
         return getClass().hashCode();
     }
 
-    public static void deliver(Order order) {
-        order.status = Status.DELIVERED;
-        order.deliveryDate = LocalDateTime.now();
+    public void deliver() {
+        this.status = Status.DELIVERED;
+        this.deliveryDate = LocalDateTime.now();
+    }
+    public Long getDifferenceDaysDelivery(){
+        Duration duration = Duration.between(this.creationDate, this.deliveryDate);
+        return duration.toDays();
     }
 }

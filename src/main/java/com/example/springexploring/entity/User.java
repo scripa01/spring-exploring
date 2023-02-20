@@ -11,6 +11,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -39,7 +40,15 @@ public class User {
     private long rating = 0;
 
     @OneToMany(mappedBy = "userWhoOrd", cascade = CascadeType.REMOVE)
-    private List<Order> orders;
+    private List<Order> orders ;
+
+
+    @OneToMany(
+            cascade = CascadeType.ALL,
+            orphanRemoval = true,
+            mappedBy = "user"
+    )
+    private List<Review> reviews = new ArrayList<>();
 
     public User(String firstName, String lastName, int age) {
         this.firstName = firstName;

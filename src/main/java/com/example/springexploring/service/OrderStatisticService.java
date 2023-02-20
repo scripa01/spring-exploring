@@ -8,5 +8,5 @@ import java.util.List;
 public interface OrderStatisticService {
     List<OrderStatisticDTO> findAll();
 
-    OrderStatisticDTO findById(Long id);
+    OrderStatisticDTO findById(Long orderId);
 }

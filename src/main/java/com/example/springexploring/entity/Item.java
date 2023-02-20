@@ -45,9 +45,16 @@ public class Item {
     @ManyToMany(mappedBy = "items")
     private List<Order> orders = new ArrayList<>();
 
+    @OneToMany(mappedBy = "item",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    private List<Review> reviews = new ArrayList<>();
+
     @Column(name = "creation_date")
     @Setter(value = AccessLevel.PRIVATE)
     private LocalDateTime creationDate;
+
 
     public Item(String name, String description, int price) {
         this.name = name;

@@ -75,7 +75,7 @@ public class OrderServiceImpl implements OrderService {
     public void setDeliveryStatus(Long orderId, Long userId) {
         Order order = orderRepository.findById(orderId).orElseThrow(() -> new CustomRuntimeException("Order with id - " + orderId + " not found"));
         assertThatUserAreOwner(userId, order);
-        assertThatUserAlreadyReceivedOrder(order);
+        assertThatOrderIsNotReceived(order);
         order.deliver();
         orderRepository.save(order);
     }
@@ -85,7 +85,7 @@ public class OrderServiceImpl implements OrderService {
             throw new CustomRuntimeException("User with Id - " + userId + " dont have order with Id - " + order.getId());
     }
 
-    private void assertThatUserAlreadyReceivedOrder(Order order) {
+    private void assertThatOrderIsNotReceived(Order order) {
         if (!order.getStatus().equals(Status.DELIVERED))
             throw new CustomRuntimeException("Order with id - " + order.getId() + " is already delivered");
     }

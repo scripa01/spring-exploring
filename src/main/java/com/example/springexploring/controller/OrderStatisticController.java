@@ -22,7 +22,7 @@ public class OrderStatisticController {
         return ResponseEntity.ok(orderStatisticService.findAll());
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/{orderId}")
     public ResponseEntity<OrderStatisticDTO> findById(@PathVariable Long id) {
         return ResponseEntity.ok(orderStatisticService.findById(id));
     }

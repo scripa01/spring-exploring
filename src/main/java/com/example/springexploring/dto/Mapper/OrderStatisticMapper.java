@@ -4,13 +4,11 @@ package com.example.springexploring.dto.Mapper;
 import com.example.springexploring.dto.OrderStatisticDTO;
 import com.example.springexploring.entity.Item;
 import com.example.springexploring.entity.Order;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.stream.Collectors;
 
 @Component
-@RequiredArgsConstructor
 public class OrderStatisticMapper implements Mapper<Order, OrderStatisticDTO> {
 
     @Override

@@ -27,7 +27,7 @@ public class OrderStatisticServiceImpl implements OrderStatisticService {
     }
 
     @Override
-    public OrderStatisticDTO findById(Long id) {
-        return orderStatisticDTOMapper.map(orderRepository.findById(id).orElseThrow(() -> new CustomRuntimeException("Order with id - " + id + " not found")));
+    public OrderStatisticDTO findById(Long orderId) {
+        return orderStatisticDTOMapper.map(orderRepository.findById(orderId).orElseThrow(() -> new CustomRuntimeException("Order with id - " + orderId + " not found")));
     }
 }

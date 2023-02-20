@@ -5,6 +5,7 @@ import com.example.springexploring.controller.UpdateCommand.UpdateOrderCommand;
 import com.example.springexploring.dto.Mapper.Mapper;
 import com.example.springexploring.dto.OrderDTO;
 import com.example.springexploring.entity.Order;
+import com.example.springexploring.entity.Status;
 import com.example.springexploring.exception.CustomRuntimeException;
 import com.example.springexploring.repository.ItemRepository;
 import com.example.springexploring.repository.OrderRepository;
@@ -74,13 +75,19 @@ public class OrderServiceImpl implements OrderService {
     public void setDeliveryStatus(Long orderId, Long userId) {
         Order order = orderRepository.findById(orderId).orElseThrow(() -> new CustomRuntimeException("Order with id - " + orderId + " not found"));
         assertThatUserAreOwner(userId, order);
-        Order.deliver(order);
+        assertThatUserAlreadyReceivedOrder(order);
+        order.deliver();
         orderRepository.save(order);
     }
 
     private void assertThatUserAreOwner(Long userId, Order order) {
         if (!order.getUserWhoOrd().getId().equals(userId))
             throw new CustomRuntimeException("User with Id - " + userId + " dont have order with Id - " + order.getId());
+    }
+
+    private void assertThatUserAlreadyReceivedOrder(Order order) {
+        if (!order.getStatus().equals(Status.DELIVERED))
+            throw new CustomRuntimeException("Order with id - " + order.getId() + " is already delivered");
     }
 
 }

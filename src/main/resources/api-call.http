@@ -1,0 +1,52 @@
+#It should be possible to open a bank account with an initial deposit and credit line.
+### Create account
+POST http://localhost:8081/accounts
+Content-Type: application/json
+
+{
+  "initialBalance": 100,
+  "owner": "Dan"
+}
+
+> {%
+  client.global.set("accountId", response.body);
+%}
+
+### Get account by id
+#It should be possible to retrieve the current account balance of a given bank account.
+GET http://localhost:8082/accounts/{{accountId}}
+
+Accept: application/json
+
+### Ask for credit
+POST http://localhost:8081/accounts/{{accountId}}/creditLines
+Content-Type: application/json
+
+{
+  "amount": 1000
+}
+
+### Validate
+PUT http://localhost:8081/accounts/validate/{{accountId}}
+
+### Withdraw money
+#It should be possible to test if a pending debit payment would exceed the overdraft limit of that bank account.
+PUT http://localhost:8081/accounts/debit/{{accountId}}
+Content-Type: application/json
+
+{
+  "amount": 1000
+}
+
+### Credit money
+#It should be possible to test if a pending debit payment would exceed the overdraft limit of that bank account.
+PUT http://localhost:8081/accounts/credit/{{accountId}}
+Content-Type: application/json
+
+{
+  "amount": 1000
+}
+
+###
+
+#It should be possible to get a list of all transactions booked of a given bank account since a given calendar date.

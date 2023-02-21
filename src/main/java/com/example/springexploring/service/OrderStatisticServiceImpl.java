@@ -15,7 +15,7 @@ import java.util.List;
 @Transactional(readOnly = true)
 @Service
 @RequiredArgsConstructor
-public class OrderStatisticServiceImpl implements OrderStatisticService {
+class OrderStatisticServiceImpl implements OrderStatisticService {
 
     private final OrderRepository orderRepository;
 

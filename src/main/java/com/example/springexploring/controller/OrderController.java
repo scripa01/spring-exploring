@@ -2,6 +2,7 @@ package com.example.springexploring.controller;
 
 
 import com.example.springexploring.controller.AddCommand.AddOrderCommand;
+import com.example.springexploring.controller.AddCommand.DeliveredOrderCommand;
 import com.example.springexploring.controller.UpdateCommand.UpdateOrderCommand;
 import com.example.springexploring.dto.OrderDTO;
 import com.example.springexploring.service.OrderService;
@@ -27,9 +28,9 @@ public class OrderController {
         return ResponseEntity.ok(orderService.findAll()); //Jackson конвертирует эти объекты в JSON
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<OrderDTO> findById(@PathVariable("id") Long id) {
-        return ResponseEntity.ok(orderService.findById(id));
+    @GetMapping("/{orderId}")
+    public ResponseEntity<OrderDTO> findById(@PathVariable Long orderId) {
+        return ResponseEntity.ok(orderService.findById(orderId));
     }
 
     @PutMapping()
@@ -37,9 +38,9 @@ public class OrderController {
         orderService.update(updateOrderCommand);
     }
 
-    @DeleteMapping("/{id}")
-    public void delete(@PathVariable Long id) {
-        orderService.delete(id);
+    @DeleteMapping("/{orderId}")
+    public void delete(@PathVariable Long orderId) {
+        orderService.delete(orderId);
     }
 
     @PostMapping("/deliver")

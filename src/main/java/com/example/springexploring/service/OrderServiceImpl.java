@@ -33,7 +33,6 @@ public class OrderServiceImpl implements OrderService {
                 userRepository.findById(command.getUserId()).orElseThrow(() -> new CustomRuntimeException("user with id - " + command.getUserId() + " not found")),
                 itemRepository.findAllById(command.getItemsId())
         );
-
         orderRepository.save(order);
     }
 
@@ -53,8 +52,9 @@ public class OrderServiceImpl implements OrderService {
     @Transactional
     public void update(UpdateOrderCommand updatedOrder) {
         Order order = orderRepository.findById(updatedOrder.getId()).orElseThrow(() -> new CustomRuntimeException("Order with id - " + updatedOrder.getId() + " not found"));
+        assertThatUserAreOwner(updatedOrder.getUserId(), order);
         order.setUserWhoOrd(userRepository.findById(updatedOrder.getUserId()).orElseThrow(() -> new CustomRuntimeException("user with id - " + updatedOrder.getUserId() + " not found")));
-        order.setItems(itemRepository.findAllById(updatedOrder.getItems()));
+        order.setItems(itemRepository.findAllById(updatedOrder.getItemId()));
         orderRepository.save(order);
     }
 
@@ -86,7 +86,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     private void assertThatOrderIsNotReceived(Order order) {
-        if (!order.getStatus().equals(Status.DELIVERED))
+        if (order.getStatus().equals(Status.DELIVERED))
             throw new CustomRuntimeException("Order with id - " + order.getId() + " is already delivered");
     }
 

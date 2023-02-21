@@ -3,20 +3,15 @@ package com.example.springexploring.controller.UpdateCommand;
 import lombok.Data;
 import lombok.ToString;
 
-import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import java.util.List;
 
 @Data
 @ToString
-public class UpdateOrderCommand {
-
+public class UpdateReviewCommand {
 
     private Long id;
-
-    @NotEmpty
-    private List<Long> itemId;
-    @NotNull
     private Long userId;
-
+    @NotBlank(message = "comment should not be empty!")
+    private String comment;
 }

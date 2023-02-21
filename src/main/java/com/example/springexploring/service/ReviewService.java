@@ -6,8 +6,7 @@ import com.example.springexploring.controller.UpdateCommand.UpdateReviewCommand;
 import org.springframework.transaction.annotation.Transactional;
 
 public interface ReviewService {
-    public void save(AddReviewCommand reviewCommand);
+    void save(AddReviewCommand reviewCommand);
 
-    @Transactional
     void update(UpdateReviewCommand updateReview);
 }

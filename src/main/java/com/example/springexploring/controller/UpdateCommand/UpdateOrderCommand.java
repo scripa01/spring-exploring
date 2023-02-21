@@ -15,7 +15,7 @@ public class UpdateOrderCommand {
     private Long id;
 
     @NotEmpty
-    private List<Long> itemId;
+    private List<Long> itemsId;
     @NotNull
     private Long userId;
 

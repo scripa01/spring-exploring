@@ -17,8 +17,8 @@ import java.util.Objects;
 public class Review {
 
     @Id
-    @SequenceGenerator(name = "order_sequence", sequenceName = "order_sequence", initialValue = 1, allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "order_sequence")
+    @SequenceGenerator(name = "review_sequence", sequenceName = "review_sequence", initialValue = 1, allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "review_sequence")
     private Long id;
 
     @NotBlank(message = "comment should not be empty!")

@@ -19,11 +19,10 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
-public class ReviewServiceImpl implements ReviewService {
+class ReviewServiceImpl implements ReviewService {
     private final UserRepository userRepository;
     private final ItemRepository itemRepository;
     private final ReviewRepository reviewRepository;
-
 
     @Override
     @Transactional
@@ -45,7 +44,7 @@ public class ReviewServiceImpl implements ReviewService {
         reviewRepository.save(review);
     }
 
-    public void assertThatUserCanWriteReviewForItem(Item item, User user) {
+    private void assertThatUserCanWriteReviewForItem(Item item, User user) {
         List<Order> orders = user.getOrders();
         for (Order order : orders) {
             if (order.getDeliveryDate() != null
@@ -56,7 +55,7 @@ public class ReviewServiceImpl implements ReviewService {
         throw new CustomRuntimeException("User cannot write review for this Item!");
     }
 
-    public void assertThatUserPutReview(Review review, User user) {
+    private void assertThatUserPutReview(Review review, User user) {
         if (!review.getUser().getId().equals(user.getId())) {
             throw new CustomRuntimeException("This user can't put review!");
         }

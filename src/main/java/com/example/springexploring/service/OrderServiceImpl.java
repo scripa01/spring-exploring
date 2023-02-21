@@ -19,7 +19,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class OrderServiceImpl implements OrderService {
+class OrderServiceImpl implements OrderService {
 
     private final OrderRepository orderRepository;
     private final UserRepository userRepository;
@@ -54,7 +54,7 @@ public class OrderServiceImpl implements OrderService {
         Order order = orderRepository.findById(updatedOrder.getId()).orElseThrow(() -> new CustomRuntimeException("Order with id - " + updatedOrder.getId() + " not found"));
         assertThatUserAreOwner(updatedOrder.getUserId(), order);
         order.setUserWhoOrd(userRepository.findById(updatedOrder.getUserId()).orElseThrow(() -> new CustomRuntimeException("user with id - " + updatedOrder.getUserId() + " not found")));
-        order.setItems(itemRepository.findAllById(updatedOrder.getItemId()));
+        order.setItems(itemRepository.findAllById(updatedOrder.getItemsId()));
         orderRepository.save(order);
     }
 

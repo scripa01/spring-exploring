@@ -6,10 +6,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -40,7 +36,7 @@ public class User {
     private long rating = 0;
 
     @OneToMany(mappedBy = "userWhoOrd", cascade = CascadeType.REMOVE)
-    private List<Order> orders ;
+    private List<Order> orders;
 
 
     @OneToMany(

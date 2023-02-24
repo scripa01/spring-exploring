@@ -38,7 +38,7 @@ public class Rating {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof User))
+        if (!(o instanceof Rating))
             return false;
         Rating rating = (Rating) o;
         return Objects.equals(id, rating.id);

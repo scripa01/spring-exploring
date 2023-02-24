@@ -1,6 +1,7 @@
 package com.example.springexploring.entity;
 
 import lombok.*;
+import org.aspectj.weaver.ast.Or;
 
 import javax.persistence.*;
 import javax.validation.constraints.Min;
@@ -74,7 +75,8 @@ public class Order {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof User))
+            return false;
         Order order = (Order) o;
         return Objects.equals(id, order.id);
     }

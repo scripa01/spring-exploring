@@ -11,5 +11,5 @@ public interface OrderStatisticService {
 
     OrderStatisticDTO findById(Long orderId);
 
-    List<CountOrdersByUserDTO> getCountOfOrdersByStatus(String string);
+    List<CountOrdersByUserDTO> getCountOfOrdersByStatus(Enum status);
 }

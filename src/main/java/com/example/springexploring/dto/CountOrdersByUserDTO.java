@@ -6,11 +6,11 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class CountOrdersByUserDTO {
-    Long userID;
+    private Long userID;
 
-    String fullName;
+    private String fullName;
 
-    Long count;
+    private Long count;
 
-    String orderId;
+    private String orderId;
 }

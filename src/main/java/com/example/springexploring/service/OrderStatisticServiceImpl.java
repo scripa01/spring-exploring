@@ -37,15 +37,9 @@ class OrderStatisticServiceImpl implements OrderStatisticService {
     }
 
     @Override
-    public List<CountOrdersByUserDTO> getCountOfOrdersByStatus(String status) {
-        List<CountOrdersByUserProjections> countListProjections = orderRepository.countOrdersByStatusAndUserWhoOrd(status);
-        List<CountOrdersByUserDTO> countByStatusAndUser = new ArrayList<>();
-
-        for (CountOrdersByUserProjections e : countListProjections) {
-            countByStatusAndUser.add(countDeliveredOrderByUserDTOMapper.map(e));
-        }
-
-        return countByStatusAndUser;
+    public List<CountOrdersByUserDTO> getCountOfOrdersByStatus(Enum status) {
+        List<CountOrdersByUserProjections> countListProjections = orderRepository.countOrdersByStatusAndUserWhoOrd(status.name());
+        return countDeliveredOrderByUserDTOMapper.mapList(countListProjections);
     }
 
 }

@@ -22,7 +22,6 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
             " JOIN users u on o.user_id = u.id " +
             " WHERE status = :status " +
             " GROUP BY user_id, first_name, last_name ")
-    List<CountOrdersByUserProjections> countOrdersByStatusAndUserWhoOrd(@Param("status") String status);
-
+    List<CountOrdersByUserProjections> countOrdersByStatusAndUserWhoOrd(@Param("status") String  status);
 
 }

@@ -6,9 +6,9 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class FindTextReviewAndNameOfUserWhoReviewedDTO {
-    Long userId;
+    private Long userId;
 
-    String userFullName;
+    private String userFullName;
 
-    String reviewText;
+    private String reviewText;
 }

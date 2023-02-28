@@ -1,6 +1,8 @@
 package com.example.springexploring.controller;
 
+import com.example.springexploring.dto.CountOrdersByUserDTO;
 import com.example.springexploring.dto.OrderStatisticDTO;
+import com.example.springexploring.entity.Status;
 import com.example.springexploring.service.OrderStatisticService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -25,5 +27,15 @@ public class OrderStatisticController {
     @GetMapping("/{orderId}")
     public ResponseEntity<OrderStatisticDTO> findById(@PathVariable Long orderId) {
         return ResponseEntity.ok(orderStatisticService.findById(orderId));
+    }
+
+    @GetMapping("/count/non-delivered")
+    public ResponseEntity<List<CountOrdersByUserDTO>> countNonDeliveredOrderByUser() {
+        return ResponseEntity.ok(orderStatisticService.getCountOfOrdersByStatus(Status.CREATED));
+    }
+
+    @GetMapping("/count/delivered")
+    public ResponseEntity<List<CountOrdersByUserDTO>> countDeliveredOrderByUser() {
+        return ResponseEntity.ok(orderStatisticService.getCountOfOrdersByStatus(Status.DELIVERED));
     }
 }

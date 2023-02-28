@@ -1,52 +1,130 @@
 #It should be possible to open a bank account with an initial deposit and credit line.
-### Create account
-POST http://localhost:8081/accounts
+### Create items
+POST http://localhost:8080/items
+Content-Type: application/json
+
+    {
+      "name": "Laptop333",
+      "description": "Laptop Computer",
+      "price": 1500
+    }
+
+> {%
+  client.global.set("accountId", response.body[10]);
+%}
+### Update item
+PUT http://localhost:8080/items
 Content-Type: application/json
 
 {
-  "initialBalance": 100,
-  "owner": "Dan"
+  "id":"1",
+  "name": "Iphone54",
+  "description": "MobilePhone",
+  "price":"5000"
 }
 
-> {%
-  client.global.set("accountId", response.body);
-%}
 
-### Get account by id
+### Get all items
 #It should be possible to retrieve the current account balance of a given bank account.
-GET http://localhost:8082/accounts/{{accountId}}
+GET http://localhost:8080/items
 
 Accept: application/json
 
-### Ask for credit
-POST http://localhost:8081/accounts/{{accountId}}/creditLines
+### Get item by Id
+#It should be possible to retrieve the current account balance of a given bank account.
+GET http://localhost:8080/items/{{itemId}}
+
+Accept: application/json
+
+### Delete item by Id
+#It should be possible to retrieve the current account balance of a given bank account.
+DELETE http://localhost:8080/items/2
+
+Accept: application/json
+
+
+### Create user
+POST http://localhost:8080/user
 Content-Type: application/json
 
 {
-  "amount": 1000
+  "firstName":"TEST2",
+  "age": "33",
+  "lastName": "PErson1"
 }
 
-### Validate
-PUT http://localhost:8081/accounts/validate/{{accountId}}
-
-### Withdraw money
-#It should be possible to test if a pending debit payment would exceed the overdraft limit of that bank account.
-PUT http://localhost:8081/accounts/debit/{{accountId}}
+### Update user
+PUT http://localhost:8080/user
 Content-Type: application/json
 
 {
-  "amount": 1000
+  "id":"1",
+  "firstName":"TEst",
+  "age": "33",
+  "lastName": "Postman5"
 }
 
-### Credit money
-#It should be possible to test if a pending debit payment would exceed the overdraft limit of that bank account.
-PUT http://localhost:8081/accounts/credit/{{accountId}}
+### Get all users
+#It should be possible to retrieve the current account balance of a given bank account.
+GET http://localhost:8080/user
+
+Accept: application/json
+
+### Get user by Id
+#It should be possible to retrieve the current account balance of a given bank account.
+GET http://localhost:8080/user/1
+
+Accept: application/json
+
+### Delete user by Id
+#It should be possible to retrieve the current account balance of a given bank account.
+DELETE http://localhost:8080/user/1
+
+Accept: application/json
+
+
+### Create order
+POST http://localhost:8080/orders
 Content-Type: application/json
 
 {
-  "amount": 1000
+  "itemsId" : [1,2,3],
+  "userId" : 1
 }
 
+### Update order
+PUT http://localhost:8080/orders
+Content-Type: application/json
+
+{
+  "id":"1",
+  "items" : [1,2] ,
+  "userId" : 1
+}
+
+### Get all orders
+#It should be possible to retrieve the current account balance of a given bank account.
+GET http://localhost:8080/orders
+
+Accept: application/json
+
+### Get order by Id
+#It should be possible to retrieve the current account balance of a given bank account.
+GET http://localhost:8080/orders/1
+
+Accept: application/json
+
+### Delete order by Id
+#It should be possible to retrieve the current account balance of a given bank account.
+DELETE http://localhost:8080/orders/1
+
+Accept: application/json
+
+### Delete order by Id
+#It should be possible to retrieve the current account balance of a given bank account.
+POST http://localhost:8080/orders/deliver
+
+Accept: application/json
 ###
 
 #It should be possible to get a list of all transactions booked of a given bank account since a given calendar date.

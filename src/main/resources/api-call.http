@@ -1,0 +1,130 @@
+#It should be possible to open a bank account with an initial deposit and credit line.
+### Create items
+POST http://localhost:8080/items
+Content-Type: application/json
+
+    {
+      "name": "Laptop333",
+      "description": "Laptop Computer",
+      "price": 1500
+    }
+
+> {%
+  client.global.set("accountId", response.body[10]);
+%}
+### Update item
+PUT http://localhost:8080/items
+Content-Type: application/json
+
+{
+  "id":"1",
+  "name": "Iphone54",
+  "description": "MobilePhone",
+  "price":"5000"
+}
+
+
+### Get all items
+#It should be possible to retrieve the current account balance of a given bank account.
+GET http://localhost:8080/items
+
+Accept: application/json
+
+### Get item by Id
+#It should be possible to retrieve the current account balance of a given bank account.
+GET http://localhost:8080/items/{{itemId}}
+
+Accept: application/json
+
+### Delete item by Id
+#It should be possible to retrieve the current account balance of a given bank account.
+DELETE http://localhost:8080/items/2
+
+Accept: application/json
+
+
+### Create user
+POST http://localhost:8080/user
+Content-Type: application/json
+
+{
+  "firstName":"TEST2",
+  "age": "33",
+  "lastName": "PErson1"
+}
+
+### Update user
+PUT http://localhost:8080/user
+Content-Type: application/json
+
+{
+  "id":"1",
+  "firstName":"TEst",
+  "age": "33",
+  "lastName": "Postman5"
+}
+
+### Get all users
+#It should be possible to retrieve the current account balance of a given bank account.
+GET http://localhost:8080/user
+
+Accept: application/json
+
+### Get user by Id
+#It should be possible to retrieve the current account balance of a given bank account.
+GET http://localhost:8080/user/1
+
+Accept: application/json
+
+### Delete user by Id
+#It should be possible to retrieve the current account balance of a given bank account.
+DELETE http://localhost:8080/user/1
+
+Accept: application/json
+
+
+### Create order
+POST http://localhost:8080/orders
+Content-Type: application/json
+
+{
+  "itemsId" : [1,2,3],
+  "userId" : 1
+}
+
+### Update order
+PUT http://localhost:8080/orders
+Content-Type: application/json
+
+{
+  "id":"1",
+  "items" : [1,2] ,
+  "userId" : 1
+}
+
+### Get all orders
+#It should be possible to retrieve the current account balance of a given bank account.
+GET http://localhost:8080/orders
+
+Accept: application/json
+
+### Get order by Id
+#It should be possible to retrieve the current account balance of a given bank account.
+GET http://localhost:8080/orders/1
+
+Accept: application/json
+
+### Delete order by Id
+#It should be possible to retrieve the current account balance of a given bank account.
+DELETE http://localhost:8080/orders/1
+
+Accept: application/json
+
+### Delete order by Id
+#It should be possible to retrieve the current account balance of a given bank account.
+POST http://localhost:8080/orders/deliver
+
+Accept: application/json
+###
+
+#It should be possible to get a list of all transactions booked of a given bank account since a given calendar date.
